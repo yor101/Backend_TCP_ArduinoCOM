@@ -1,32 +1,30 @@
 package Yorick.Laros;
 
 
-import java.beans.Encoder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.CharBuffer;
-import java.util.Scanner;
 
 public class TCPController{
+
+    private ServerSocket serverSocket;
+    private Socket socket;
+    private BufferedReader in;
 
 
 
     public void TCPHandler(int portNumber) {
 
-
         try {
-            ServerSocket serverSocket = new ServerSocket(portNumber);
-            Socket socket = serverSocket.accept();
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            serverSocket = new ServerSocket(portNumber);
+            socket = serverSocket.accept();
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             if (socket.isBound()) {
                 System.out.println("connected");
             }
-
 
             char c;
             int value;
@@ -41,6 +39,5 @@ public class TCPController{
                     + portNumber + " or listening for a connection");
             System.out.println(e.getMessage());
         }
-
     }
 }
