@@ -1,21 +1,27 @@
 package Yorick.Laros;
 
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 
-public class TCPController{
+public class TCPController extends Thread {
 
     private ServerSocket serverSocket;
     private Socket socket;
     private BufferedReader in;
 
+    private int portNumber;
+
+    public TCPController(int portNumber) {
+        this.portNumber = portNumber;
+    }
 
 
-    public void TCPHandler(int portNumber) {
+    @Override
+    public void run() {
 
         try {
             serverSocket = new ServerSocket(portNumber);
@@ -28,10 +34,13 @@ public class TCPController{
 
             char c;
             int value;
+            String s;
 
             while ((value = in.read()) != -1) {
                 c = (char)value;
-                System.out.print(c);
+                s = Character.toString(c);
+                final String message = s;
+                System.out.println(message);
             }
 
         } catch (IOException e) {
