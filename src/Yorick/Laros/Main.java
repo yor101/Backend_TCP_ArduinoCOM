@@ -7,7 +7,7 @@ import java.net.Socket;
 public class Main {
 
     public static void main(String[] args) {
-	    TCPController tcp = new TCPController();
-	    tcp.TCPHandler(4099);
+	    TCPController tcp = new TCPController(4099);
+	    tcp.run();
     }
 }
